@@ -144,14 +144,16 @@ main .content #task #cmpltBtn {
     }
 
     main .content #task {
-        font-size: 15px;
-        padding: 10px;
+        font-size: large;
+        font-weight: bold;
+        padding: 12px;
         margin-bottom: 5px;
     }
 
     main .content #unconfirmed {
-        font-size: 15px;
-        padding: 10px;
+        font-size: large;
+        font-weight: bold;
+        padding: 12px;
         margin-bottom: 5px;
         color: white;
     }
