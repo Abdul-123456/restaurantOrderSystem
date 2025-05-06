@@ -1,6 +1,26 @@
 var main = function() {
     "use strict";
 
+    const fingerSnap = document.getElementById("fingerSnap");
+
+    const checkUnconfirmedOrders = () => {
+        console.log("checking unconfirmed orders!");
+        $.get("/unconfirmedorders", {}, (response) => {
+            if (response.length > 0) {
+                fingerSnap.play();
+                $(".tabs .orders").css("background", "green");
+                $(".tabs .orders").css("color", "white");
+            }
+            else {
+                $(".tabs .orders").css("color", "black");
+                $(".tabs .orders").css("background", "rgb(163, 163, 163)");
+            }
+        });
+    };
+
+    checkUnconfirmedOrders();
+    setInterval(checkUnconfirmedOrders, 5000);
+
     $(".tabs a").toArray().forEach((element) => {
         $(element).on("click", (event) => {
             event.preventDefault();
@@ -18,6 +38,7 @@ var main = function() {
                             unconfirmedDiv.text(response[i].quantity + " " + response[i]["itemName"] + " (" + response[i].type + ")");
                             unconfirmedDiv.on("click", () => {
                                 $.post("/confirmorder", {"orderId":response[i].id}, (res) => {
+                                    checkUnconfirmedOrders();
                                     $(element).click();
                                 });
                             });
@@ -93,13 +114,11 @@ var main = function() {
                         var type;
                         var quantity;
                         var itemId;
-                        // console.log($(type).is(":checked"));
 
                         for (var i=0; i<tables.length; i++) {
                             var tableId = "#" + (tables[i].toLowerCase()).replaceAll(" ", "");
                             if ($(tableId).is(":checked")) {
                                 type = tables[i];
-                                // quantity = $(tableId).val();
                             }
                         }
 
@@ -108,7 +127,9 @@ var main = function() {
                             if ($(item).is(":checked")) {
                                 itemId = response[j].id;
                                 quantity = $("#quantity"+j).val();
-                                $.post("/neworder", {"type":type, "itemId":itemId, "quantity":quantity}, (res) => {});
+                                $.post("/neworder", {"type":type, "itemId":itemId, "quantity":quantity}, (res) => {
+                                    checkUnconfirmedOrders();
+                                });
                             }
 
                             if (j==response.length-1) {
@@ -126,6 +147,7 @@ var main = function() {
                 });
             }
         });
+        $(".tabs .orders a").click();
     });
 };
 

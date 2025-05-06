@@ -65,6 +65,18 @@ app.get("/incompleteorders", async (req, res) => {
     });
 });
 
+app.get("/unconfirmedorders", async (req, res) =>{
+    var query = "SELECT * FROM restaurant_order_system.order WHERE confirmed = 0;";
+    await db.query(query, (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.send(results);
+        }
+    });
+});
+
 app.post("/completeorder", async (req, res) => {
     var orderId = req.body["orderId"];
     var query = "UPDATE restaurant_order_system.order SET completed = 1 WHERE id = " + orderId + ";";

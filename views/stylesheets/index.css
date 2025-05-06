@@ -203,7 +203,7 @@ main .content #task #cmpltBtn {
     }
     
     #desktop .active, #desktop a:hover {
-        background: rgb(151, 151, 151);
+        background: rgb(151, 151, 151) !important;
     }
 
     main .content {
