@@ -104,7 +104,7 @@ var main = function() {
                 div.append("<p>Please select item:</p>")
                 $.get("/items", {}, (response) => {
                     for (let i=0; i<response.length; i++) {
-                        div.append("<input type=\"checkbox\" id=\"item" + i + "\"><label for=\"item" + i + "\">" + response[i].name + "</label><input type=\"number\" id=\"quantity" + i + "\"><br>");
+                        div.append("<input type=\"checkbox\" id=\"item" + i + "\"><label for=\"item" + i + "\">" + response[i].name + "</label><br>Quantity: <input type=\"number\" id=\"quantity" + i + "\"><br>");
                     }
 
                     var addBtn = $("<button>");
