@@ -1,11 +1,6 @@
 const express = require("express");
-// const session = require('express-session');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
-const { ColorNoneIcon } = require("@shopify/polaris-icons");
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
-// const path = require("path");
 const app = express();
 const PORT  = process.env.PORT || 3000;
 
@@ -85,6 +80,20 @@ app.post("/completeorder", async (req, res) => {
     });
 });
 
+app.post("/confirmorder", async (req, res) => {
+    var orderId = req.body["orderId"];
+    var query = "UPDATE restaurant_order_system.order SET confirmed = 1 WHERE id = " + orderId + ";";
+    await db.query(query, (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.status(200);
+            res.send(results);
+        }
+    })
+})
+
 app.post("/neworder", async (req, res) => {
     var orderType = req.body["type"];
     var itemId = req.body["itemId"];
@@ -94,7 +103,6 @@ app.post("/neworder", async (req, res) => {
         quantity = 1;
     }
 
-    console.log("hello");
     var query = "INSERT INTO restaurant_order_system.order (type, item_id, quantity) VALUES (\'" + orderType + "\', \'" + itemId + "\', " + quantity + ");";
 
     await db.query(query, (error, results) => {

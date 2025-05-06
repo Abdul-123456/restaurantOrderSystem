@@ -12,26 +12,37 @@ var main = function() {
                 console.log("FIRST TAB CLICKED!");
                 $.get("/incompleteorders", {}, (response) => {
                     for (let i=0; i<response.length; i++) {
-                        var className = "" + response[i]["id"];
-                        var taskDiv = $("<div>");
-                        taskDiv.attr("id", "task");
-                        taskDiv.addClass(className);
-                        taskDiv.text(response[i].quantity + " " + response[i]["itemName"] + " (" + response[i].type + ")");
-
-                        var cmpBtn = $("<button>");
-                        cmpBtn.attr("id", "cmpltBtn");
-                        cmpBtn.attr("title", "Mark Completed");
-                        cmpBtn.append("&#10003;");
-
-                        cmpBtn.on("click", () => {
-                            $.post("/completeorder", {orderId: response[i]["id"]}, (res) => {
-                                $(element).click();
+                        if (response[i].confirmed == '0') {
+                            var unconfirmedDiv = $("<div>");
+                            unconfirmedDiv.attr("id", "unconfirmed");
+                            unconfirmedDiv.text(response[i].quantity + " " + response[i]["itemName"] + " (" + response[i].type + ")");
+                            unconfirmedDiv.on("click", () => {
+                                $.post("/confirmorder", {"orderId":response[i].id}, (res) => {
+                                    $(element).click();
+                                });
                             });
-                        });
+                            
+                            $("main .content").append(unconfirmedDiv);
+                        }
+                        else {
+                            var taskDiv = $("<div>");
+                            taskDiv.attr("id", "task");
+                            taskDiv.text(response[i].quantity + " " + response[i].itemName + " (" + response[i].type + ")");
 
-                        taskDiv.append(cmpBtn);
+                            var cmpBtn = $("<button>");
+                            cmpBtn.attr("id", "cmpltBtn");
+                            cmpBtn.attr("title", "Mark Completed");
+                            cmpBtn.append("&#10003;");
+                            cmpBtn.on("click", () => {
+                                $.post("/completeorder", {"orderId":response[i].id}, (res) => {
+                                    $(element).click();
+                                });
+                            });
 
-                        $("main .content").append(taskDiv);
+                            taskDiv.append(cmpBtn);
+
+                            $("main .content").append(taskDiv);
+                        }
                     }
                 });
             }
