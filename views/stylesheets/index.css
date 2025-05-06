@@ -1,0 +1,237 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    background: rgb(185, 185, 185);
+    height: 100%;
+}
+
+header {
+    border: 1px solid black;
+    background: rgb(185, 185, 185);
+    position: fixed;
+    width: 100%;
+}
+
+header h1 {
+    font-family: Verdana, sans-serif;
+    margin-top: 3px;
+    float: left;
+    font-size: 15px;
+    padding: 10px;
+}
+
+header .logout {
+    font-family: Verdana, sans-serif;
+    font-size: 15px;
+    float: right;
+    border-radius: 15px;
+    border: 3px solid rgb(185, 185, 185);
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+header .logout:hover {
+    transition-duration: 500ms;
+    color: white;
+}
+
+main {
+    min-height: 100vh;
+    width: 100%;
+}
+
+main .content {
+    min-height: 95vh;
+    background: rgb(163, 163, 163);
+}
+
+main .content #task {
+    font-family: Verdana, sans-serif;
+    background-color: rgb(151, 151, 151);
+    border-radius: 5px;
+}
+
+main .content #task #delBtn,  main .content #task #cmpltBtn, main .content #task #incmpltBtn {
+    background: black;
+    color: white;
+    float: right;
+    border-radius: 50%;
+    border-style: none;
+    cursor: pointer;
+}
+
+main .content #task #delBtn {
+    background: red;
+}
+
+main .content #task #cmpltBtn {
+    background: green;
+}
+
+.addSection {
+    margin: 10px;
+    padding: 15px;
+    font-family: Verdana, sans-serif;
+    font-size: large;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.addSection p, .addSection input, .addSection label {
+    margin-bottom: 25px;
+}
+
+.addSection button {
+    padding: 10px;
+    border-radius: 10px;
+    border-style: hidden;
+    font-size: large;
+    font-weight: bold;
+    background-color: green;
+    color: white;
+}
+
+@media only screen and (max-width: 1200px) {
+    #desktop {
+        display: none;
+    }
+
+    #mobile {
+        font-family: Verdana, sans-serif;
+        background: rgb(163, 163, 163);
+        width: 100%;
+        text-align:  center;
+        overflow: hidden;
+        margin: auto;
+        height: 28px;
+    }
+
+    #mobile a {
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        height: 100%;
+        margin-right: 10px;
+        padding: 5px;
+        font-size: 15px;
+    }
+
+    #mobile .active {
+        border: 1px solid rgb(151, 151, 151);
+        background: rgb(151, 151, 151);
+    }
+
+    main {
+        padding-top: 3px;
+    }
+
+    main .content {
+        margin-top: 68px;
+        padding: 5px;
+    }
+
+    main .content #task {
+        font-size: 15px;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    main .content #task #delBtn {
+        font-size: 15px;
+        margin-left: 8px;
+    }
+    
+    main .content #task #cmpltBtn {
+        font-size: 13px;
+    }
+
+    main .content #task #incmpltBtn {
+        font-size: 15.5px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    header h1, header .logout {
+        font-size: 25px;
+    }
+
+
+    #mobile {
+        display: none;
+    }
+
+    #desktop {
+        font-family: Verdana, sans-serif;
+        margin-top: 50px;
+        margin-left: 5px;
+        float: left;
+        min-height: 95vh;
+        border-radius: 10px;
+        background: rgb(163, 163, 163);
+        font-size: 15px;
+        width: 10%;
+    }
+    
+    #desktop a {
+        margin-left: .5vw;
+        margin-top: 15px;
+        padding: 8px;
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        border-radius: 5px;
+    }
+    
+    #desktop .active, #desktop a:hover {
+        background: rgb(151, 151, 151);
+    }
+
+    main .content {
+        margin-right: .5vw;
+        margin-top: 50px;
+        float: right;        
+        border-radius: 10px;
+        font-size: 15px;
+        width: 88%;
+    }
+
+    main .content #task {
+        font-weight: bold;
+        font-size: large;
+        margin: 15px;
+        padding: 15px;
+        margin-bottom: 5px;
+    }
+
+    main .content #task #delBtn {
+        font-size: 15px;
+        margin-left: 8px;
+    }
+    
+    main .content #task #cmpltBtn {
+        font-size: 13px;
+    }
+
+    main .content #task #incmpltBtn {
+        font-size: 15.5px;
+    }
+}
+
+.notificationBar {
+    background: rgb(163, 163, 163);
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    display: none;
+    margin-left: 45%;
+}
+
+main .content .addSection p {
+    font-family: Verdana, sans-serif;
+}
